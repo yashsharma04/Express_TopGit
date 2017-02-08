@@ -13,7 +13,7 @@ exports.projects=function(req,response){
 			else{
 				var items = JSON.parse(data).items;
 				var len = items.length ; 
-				var itemsByName = [];
+				var itemsByName = [];	
 				for(var i =0 ; i<len ; i++){
 					if(lodash.includes(items[i].name,name)){
 						itemsByName.push(items[i]);
@@ -26,9 +26,7 @@ exports.projects=function(req,response){
 				for(var i=start;i<end && i<itemsByName.length;i++){
 						itemsByPage.push(itemsByName[i]);
 				} 
-				response.writeHead(200, {'Content-Type': 'text/plain'});
-				response.write(JSON.stringify(itemsByPage));
-				response.end();
+				response.send(JSON.stringify(itemsByPage));
 			}	
 		});
 		}
@@ -37,10 +35,7 @@ exports.projects=function(req,response){
 			if (err) 
 				console.log(err);
 			else{
-
-				response.writeHead(200, {'Content-Type': 'text/plain'});
-				response.write(data);
-				response.end();
+				response.send(data);
 			}	
 		});
 	}
