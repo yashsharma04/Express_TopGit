@@ -1,6 +1,8 @@
 var controller=require('./controller')
-exports.init=function(app){
+var init=function(app){
 
-	app.get('/getData',controller.getData);
-	app.post('/createData',controller.createData)
+	app.get('/',controller.index);
+	app.get('/getProjects',controller.projects);
+	
 }	
+module.exports= init ;

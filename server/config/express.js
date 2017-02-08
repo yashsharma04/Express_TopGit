@@ -1,6 +1,6 @@
-
+var path = require('path');
+var express = require('express');
 var init=function(app){
-
-	app.use(static())
+	app.use(express.static(path.resolve(__dirname+"/../../client/public")));
 }
-mpdule.exports=init
+module.exports=init;
