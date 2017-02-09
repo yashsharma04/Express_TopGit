@@ -10,25 +10,43 @@ $(function(){
 				document.getElementById("list").innerHTML= "" ;
 					$.ajax({
 					url:"http://localhost:3000/getProjects?name="+name.val()+"&page="+page,
-					success:function(response){					
-						items = JSON.parse(response);
-						console.log("page1:"+page);
-						console.log("items:"+items);
-					 	$.each(items,function(index,value){
-					 		var html1 = `<li class='media'>
-						  	<div class='media-left'>
-					  		<img class='media-object' src='http://www.clker.com/cliparts/6/z/9/4/G/v/right-double-arrow-md.png' width='50' height='50' alt='...'>
-					  		</div>
-					  		<div class='media-body'>
-					  		<h4 class='media-heading'>`+items[index].name+`</h4>
-					  		Language : `+items[index].language+` | `+items[index].description+`
-					  		</div>
-					  		</li> `;
-					  	var ul = $("#list") ;
-					  	console.log("page2:"+page); 
-					  	ul.append(html1);	
-					});
-					 
+					success:function(response){	
+						try{
+							var status = JSON.parse(response) ; 	
+						}
+						catch(err){
+							document.getElementById("msg").innerText= status.msg;
+							setTimeout(function()
+							{
+								document.getElementById("msg").innerText= "" ;
+							}, 3000);	
+							return false ;						
+						}
+						
+						if(status.success){
+								items = status.data;
+							 	$.each(items,function(index,value){
+							 		var html1 = `<li class='media'>
+								  	<div class='media-left'>
+							  		<img class='media-object' src='http://www.clker.com/cliparts/6/z/9/4/G/v/right-double-arrow-md.png' width='50' height='50' alt='...'>
+							  		</div>
+							  		<div class='media-body'>
+							  		<h4 class='media-heading'>`+items[index].name+`</h4>
+							  		Language : `+items[index].language+` | `+items[index].description+`
+							  		</div>
+							  		</li> `;
+							  	var ul = $("#list") ;
+							  	ul.append(html1);	
+							});
+						}	
+						else {
+
+							document.getElementById("msg").innerText= status.msg;
+							setTimeout(function()
+							{
+								document.getElementById("msg").innerText= "" ;
+							}, 3000);
+						}
 		},
 		error : function(request,status,error){
 			console.log(error);
@@ -135,28 +153,40 @@ $(function(){
 		 			// $('#pagination-demo').twbsPagination.onPageClick();	
 		 			var name= $("#search_name");
 					document.getElementById("list").innerHTML= "" ;
-
 					var page = 1;
 						$.ajax({
-						//url:"http://localhost:8080/getProjects?name="+name.val(),
-						url:"http://localhost:3000/getProjects?name="+name.val()+"&page="+page,
-						success:function(response){	
-
-							items = JSON.parse(response); 
-							console.log(typeof(items));
-						 	$.each(items,function(index,value){
-						 		var html1 = `<li class='media'>
-							  	<div class='media-left'>
-						  		<img class='media-object' src='http://www.clker.com/cliparts/6/z/9/4/G/v/right-double-arrow-md.png' width='50' height='50' alt='...'>
-						  		</div>
-						  		<div class='media-body'>
-						  		<h4 class='media-heading'>`+items[index].name+`</h4>
-						  		Language : `+items[index].language+` | `+items[index].description+`
-						  		</div>
-						  		</li> `;
-						  	var ul = $("#list") ; 
-						  	ul.append(html1);	
-						});
+							url:"http://localhost:3000/getProjects?name="+name.val()+"&page="+page,
+							success:function(response){	
+								try{
+									var status = JSON.parse(response) ; 	
+								}
+								catch(err){
+									document.getElementById("msg").innerText= status.msg;
+									setTimeout(function()
+									{
+										document.getElementById("msg").innerText= "" ;
+									}, 3000);	
+									return false ;						
+								} 
+								if(status.success){
+									items = status.data ;
+								 	$.each(items,function(index,value){
+								 		var html1 = `<li class='media'>
+									  	<div class='media-left'>
+								  		<img class='media-object' src='http://www.clker.com/cliparts/6/z/9/4/G/v/right-double-arrow-md.png' width='50' height='50' alt='...'>
+								  		</div>
+								  		<div class='media-body'>
+								  		<h4 class='media-heading'>`+items[index].name+`</h4>
+								  		Language : `+items[index].language+` | `+items[index].description+`
+								  		</div>
+								  		</li> `;
+								  	var ul = $("#list") ; 
+								  	ul.append(html1);	
+									});
+								}
+								else{
+									
+								}
 					},
 					error : function(request,status,error){
 						console.log(error);
@@ -170,6 +200,5 @@ $(function(){
 					
 			}
 	    });
-      //search by name ends 
-
+      //search by name ends
 });

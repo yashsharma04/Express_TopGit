@@ -1,8 +1,9 @@
-var express=require('express')
+var express=require('express');
+var index = require('./config');
 var app=express();
 
 require("./config/express")(app);
 require("./routes")(app);
-app.listen(3000, function () {
-  console.log('Example app listening on Port 3000!')
+app.listen(index.port, function () {
+  console.log('Example app listening on Port '+index.port)
 });
