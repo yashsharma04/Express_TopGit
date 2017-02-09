@@ -11,18 +11,7 @@ $(function(){
 					$.ajax({
 					url:"http://localhost:3000/getProjects?name="+name.val()+"&page="+page,
 					success:function(response){	
-						try{
-							var status = JSON.parse(response) ; 	
-						}
-						catch(err){
-							document.getElementById("msg").innerText= status.msg;
-							setTimeout(function()
-							{
-								document.getElementById("msg").innerText= "" ;
-							}, 3000);	
-							return false ;						
-						}
-						
+						var status = JSON.parse(response) ; 	
 						if(status.success){
 								items = status.data;
 							 	$.each(items,function(index,value){
@@ -157,17 +146,7 @@ $(function(){
 						$.ajax({
 							url:"http://localhost:3000/getProjects?name="+name.val()+"&page="+page,
 							success:function(response){	
-								try{
-									var status = JSON.parse(response) ; 	
-								}
-								catch(err){
-									document.getElementById("msg").innerText= status.msg;
-									setTimeout(function()
-									{
-										document.getElementById("msg").innerText= "" ;
-									}, 3000);	
-									return false ;						
-								} 
+								var status = JSON.parse(response) ; 	
 								if(status.success){
 									items = status.data ;
 								 	$.each(items,function(index,value){
