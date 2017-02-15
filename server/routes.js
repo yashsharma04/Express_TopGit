@@ -4,6 +4,7 @@ var init=function(app){
 	app.get('/',function(req,response){
 		response.sendFile(path.resolve(__dirname + '/../client/index.html'));
 	});
-	app.post('/submitData',controller.submitData);
+	app.use('/api/sample',require('./api/sample'));
 }	
-module.exports= init ;
+module.exports= init;
+

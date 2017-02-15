@@ -1,12 +1,13 @@
-var express=require('express');
+var express = require('express');
 var index = require('./config');
+var db = require('./config/database');
 var pg = require('pg');
-var app=express();
-
+var app = express();
+console.log(db);
 require("./config/express")(app);
-require("./routes")(app); 
+require("./routes")(app);
 
-const client = new pg.Client({user: 'postgres', database :'test' , password : 'postgres'});
+const client = new pg.Client(db);
 client.connect(function(err){
 	if(err)	throw err ;
 	client.query('create table if not exists sample(id integer primary key , text varchar(200))',function(err,result){
