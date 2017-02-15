@@ -6,5 +6,5 @@ var init=function(app){
 	});
 	app.use('/api/sample',require('./api/sample'));
 }	
-module.exports= init;
+module.exports = init;
 

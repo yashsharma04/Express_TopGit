@@ -4,7 +4,9 @@ var insert = function insertData(fname) {
 	client.connect(function(err){
 		if(err)	throw err ;
 		client.query('insert into sample values($1,$2)',['2',fname],function(err,result){
-			if(err) throw err;
+			if(err){
+				return false; 
+			}
 			return true; 
 			client.end(function(err){
 				if(err) throw err ; 
