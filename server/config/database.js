@@ -1,1 +1,0 @@
-module.exports = {user: 'postgres', database :'test' , password : 'postgres'};

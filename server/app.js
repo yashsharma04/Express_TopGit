@@ -6,17 +6,10 @@ var app = express();
 console.log(db);
 require("./config/express")(app);
 require("./routes")(app);
+var sql = require("./sqldb/index.js");
 
-const client = new pg.Client(db);
-client.connect(function(err){
-	if(err)	throw err ;
-	client.query('create table if not exists sample(id integer primary key , text varchar(200))',function(err,result){
-		if(err) throw err ; 
-		client.end(function(err){
-			if(err) throw err ; 
-		});
-	});
-});
+sql();
+
 app.listen(index.port, function () {
   console.log('Example app listening on Port '+index.port)
 });
