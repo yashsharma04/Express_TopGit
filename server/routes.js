@@ -8,4 +8,3 @@ var init=function(app){
 	app.use('/api/address',require('./api/address'));
 }	
 module.exports = init;
-

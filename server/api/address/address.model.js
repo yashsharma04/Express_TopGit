@@ -1,7 +1,9 @@
 var sequelize = require('sequelize');
 var connectionString = require('./../../config/database');
+var connection = new sequelize('userdb','postgres','postgres',{dialect:'postgres',
+			define : {timestamps : false,
+						freezeTableName : true  }}) ;
 var sql = function(){
-		var connection = new sequelize('userdb','postgres','postgres',{dialect:'postgres'}) ;
 		var address = connection.define('address',{
 			id:{
 				type :sequelize.INTEGER ,
@@ -12,24 +14,26 @@ var sql = function(){
 			},
 			{
 				classMethods : {
-					associate : function(model){
-						var user  = model['user']; 
-						user.hasMany(model.address);
+					associate : function(models){
+						var user  = models['user']; 
+						var Address = models.address;
+						user.hasMany(models.address,{
+							foreignKey : "user_id"
+						});
 					},
-					insertData : function(data){
-						this.create({
+					insertData : function(models, data){
+						models.address.create({
 							content : data.content,
-							userId : data.id 
-						}).then(function(){
+							user_id : data.id
+						})
+						.then(function(){
 							console.log("working ");
 						});
 					}
 				}
 			}
 		);
-		connection.sync() ;		
+		connection.sync();		
 		return address; 
 	}
-module.exports = sql ; 
-
-
+module.exports = sql;

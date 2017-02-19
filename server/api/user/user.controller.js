@@ -1,5 +1,8 @@
 var model = require('./user.model.js');
 var path = require('path');
+var models = require('./../../sqldb');
+var db = models();
+console.log(db);
 var data = {
 	insert : function(req,response){
 		console.log(req);
@@ -11,7 +14,7 @@ var data = {
 				age : age 
 			}
 			console.log(data);
-			model().insertData(model, data);
+			model().insertData(db, data);
 		}
 	}
 }

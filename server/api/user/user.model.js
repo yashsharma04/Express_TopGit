@@ -1,9 +1,11 @@
 var path = require('path');
 var sequelize = require('sequelize');
 var connectionString = require('./../../config/database');
-var address = require('./../address');
+var connection = new sequelize('userdb','postgres','postgres',{dialect:'postgres',
+			define: {timestamps : false,
+						freezeTableName : true  }}) ;
 var sql = function(){
-		var connection = new sequelize('userdb','postgres','postgres',{dialect:'postgres'}) ;
+	
 		var user = connection.define('user',{
 			id :{
 				type:sequelize.INTEGER ,
@@ -18,8 +20,8 @@ var sql = function(){
 			}},
 			{
 				classMethods : {
-					insertData : function(sql,data) {
-						this.create({
+					insertData : function(models,data) {
+						models.user.create({
 							name : data.name,
 							age : data.age 
 						}).then(function(){
