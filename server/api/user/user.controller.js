@@ -1,8 +1,7 @@
-var model = require('./user.model.js');
+var model = require('./user.model.js')();
 var path = require('path');
 var models = require('./../../sqldb');
 var db = models();
-console.log(db);
 var data = {
 	insert : function(req,response){
 		if(req.method=='POST'){
@@ -13,7 +12,7 @@ var data = {
 				age : age 
 			}
 			console.log(data);
-			model().insertData(db, data);
+			model.insertData(db, data);
 		}
 	},
 	search : function(req,response){
@@ -23,13 +22,13 @@ var data = {
 				var data =  {
 					id : id 
 				}
-				model().search(db, data,function(result){
+				model.search(db, data,function(result){
 					response.send(result);
 				});
 
 			}
 			else {
-				model().searchAll(db , function(result){
+				model.searchAll(db , function(result){
 					response.send(result);
 				});
 			}
@@ -43,7 +42,7 @@ var data = {
 			var data = {
 				id : id
 			} 
-			model().delete(db,data,function(result){
+			model.delete(db,data,function(result){
 				response.send("Successfully deletd ");
 			});
 		}
@@ -55,7 +54,7 @@ var data = {
 				name : req.body.name  ,
 				age : req.body.age 
 			}
-			model().updateUser(db,data,function(result){
+			model.updateUser(db,data,function(result){
 				response.send("Updated Successfully");
 			});
 		}

@@ -22,7 +22,9 @@ var sql = function(){
 						});
 					},	
 					insertData : function(models, data){
-						models.address.create({
+
+						console.log("inserted")
+						this.create({
 							content : data.content,
 							user_id : data.id
 						})

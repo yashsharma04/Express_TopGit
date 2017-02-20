@@ -1,10 +1,12 @@
-var model = require('./address.model.js');
+var model = require('./address.model.js')();
 var path = require('path');
 var models = require('./../../sqldb/index');
 var db = models();
 
 var data = {
 	insert :  function(req,response){
+
+		console.log(model===db['address'])
 		if(req.method=='POST'){
 			var id   = req.body.id ; 
 			var content = req.body.content ; 
@@ -12,7 +14,7 @@ var data = {
 				id : id ,
 				content : content 
 			}
-			model().insertData(db,data);
+			model.insertData(db,data);
 		}
 		else {
 			response.send("unauthorize request");
@@ -25,12 +27,12 @@ var data = {
 				var data = {
 					id: id 
 				}
-				model().search(db,data,function(data){
+				model.search(db,data,function(data){
 					response.send(data);
 				});
 			}
 			else {
-				model().searchAll(db,function(data){
+				model.searchAll(db,function(data){
 					response.send(data);
 				});
 			}
@@ -44,7 +46,7 @@ var data = {
 			var data = {
 				id : id
 			} 
-			model().delete(db,data,function(result){
+			model.delete(db,data,function(result){
 				response.send("Successfully deleted ");
 			});
 		}
@@ -58,7 +60,7 @@ var data = {
 			}
 			console.log(data);
 			console.log(db);	
-			model().updateAddress(db,data,function(result){
+			model.updateAddress(db,data,function(result){
 				response.send("Updated Successfully");
 			});
 		}
