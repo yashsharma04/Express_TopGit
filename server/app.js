@@ -4,9 +4,7 @@ var pg = require('pg');
 var app = express();
 require("./config/express")(app);
 require("./routes")(app);
-var sql = require("./sqldb");
-// var models  = sql();	
-// console.log("models in app.js",models);
+var sql = require("./sqldb");	
 
 app.listen(index.port, function () {
   console.log('Example app listening on Port '+index.port)

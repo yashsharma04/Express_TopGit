@@ -20,7 +20,7 @@ var sql = function(){
 						user.hasMany(models.address,{
 							foreignKey : "user_id"
 						});
-					},
+					},	
 					insertData : function(models, data){
 						models.address.create({
 							content : data.content,
@@ -28,6 +28,52 @@ var sql = function(){
 						})
 						.then(function(){
 							console.log("working ");
+						});
+					},
+					search : function(models,data,cb){
+						models.address.findAll({
+							attributes:['id','content','user_id'],
+							where : {
+								id : data.id 
+							}
+						}).then(function(result){
+							var data = [] ;
+							data.push(result[0].dataValues);
+							cb(data);
+						});
+					},
+					searchAll : function(models,cb){
+						models.address.findAll({
+							attributes:['id','content','user_id']
+						}).then(function(result){
+							var data = [] ;
+							for(var i=0 ; i<result.length ;i++){
+								data.push(result[i].dataValues); 
+							}
+							cb(data);
+						});
+					},
+					delete : function(models,data,cb){
+
+						models.address.destroy({
+							where  : {
+								id : data.id
+							}
+						}).then(function(result){
+							cb(result);
+						});
+					},
+					updateAddress : function(models,data,cb){
+						console.log("models",models);
+						console.log("data",data);
+						models.address.update({
+							content : data.content} ,
+							{
+								where : {
+											id : data.id 
+										}}
+						).then(function(result){
+							cb(result);
 						});
 					}
 				}
