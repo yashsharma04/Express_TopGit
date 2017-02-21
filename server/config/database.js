@@ -1,1 +1,0 @@
-module.exports = "'userdb','postgres','postgres',{dialect:'postgres'}" ;
