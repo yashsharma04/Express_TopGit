@@ -1,0 +1,21 @@
+.header {
+	width: 100% ;
+	text-align: center ;
+	font-size: 22px; 
+
+
+}
+.left {
+	float :left; 
+	margin-top: 6px ;
+	margin-left: 5px ;
+}
+.right {
+	float: right ;
+	margin-top: 6px ;
+	margin-right: 5px ;	
+}
+.color{
+	color:black!important;
+	background-color: white!important; 
+}

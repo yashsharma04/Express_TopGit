@@ -1,25 +1,24 @@
-import React from 'react';
-import Operations  from './components/operations.jsx';
-class App extends React.Component {
-   constructor(props) {
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Router, Route } from 'react-router'
+import {Nav,NavItem} from 'react-bootstrap'
+import Header from './Components/Header.jsx'
+import NavBar from './Components/NavBar.jsx'
+import Content from './Components/Content.jsx'
+
+class Home extends React.Component {
+   constructor(props){
       super(props);
-      this.state={
-         value : ''
-      };
-      this.result = this.result.bind(this);
    }
-   result(response){
-      console.log(response);
-      console.log(this);
-      this.setState({value: response});
-   }   
-   render() {
+   render(){
       return (
          <div>
-            <Operations result={this.result}/>
-            <input type='text' disabled value={this.state.value}/>
+            <Header/>
+            <NavBar/> 
+            <Content/>
          </div>
-      );
+         )
    }
 }
-export default App;
+
+export default Home
