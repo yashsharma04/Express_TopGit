@@ -9,16 +9,26 @@ import Content from './Components/Content.jsx'
 class Home extends React.Component {
    constructor(props){
       super(props);
+      this.props = props ; 
+      this.state = {
+         val:0
+      }
+      this.currentGroupId= this.currentGroupId.bind(this);
+      var that = this; 
+   }
+   currentGroupId(data){
+      this.setState({
+         val :data
+      })
    }
    render(){
       return (
          <div>
             <Header/>
-            <NavBar/> 
-            <Content/>
+            <NavBar getData={this.state.val} currentGroupId={this.currentGroupId}/> 
+            <Content getData={this.state.val}/>
          </div>
          )
    }
 }
-
 export default Home

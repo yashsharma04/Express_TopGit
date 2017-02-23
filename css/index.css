@@ -1,12 +1,10 @@
 .header {
 	width: 100% ;
 	text-align: center ;
-	font-size: 22px; 
-
-
+	font-size: 22px;
 }
 .left {
-	float :left; 
+	float :left ; 
 	margin-top: 6px ;
 	margin-left: 5px ;
 }
@@ -18,4 +16,7 @@
 .color{
 	color:black!important;
 	background-color: white!important; 
+	margin-bottom : 5px ;
+	text-align: center;  
+	
 }
