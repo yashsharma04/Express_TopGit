@@ -9,7 +9,8 @@ class Content extends React.Component{
 		this.state = {
 			items : [],
 			groups :[],
-			curItems : []
+			curItems : [],
+			cart : []
 		}
 		this.getContent = this.getContent.bind(this)
 		this.getContent()
@@ -51,7 +52,37 @@ class Content extends React.Component{
 		    });			
 		}
 	}
+	addToCart(id){
+		var items = this.state.items;
+		var cart = this.state.cart 
+		var price = 0
+		for(var i in items){
+			if(items[i].food_item_id==id){
+				price = items[i].food_item_price
+			}
+		}
+		var count = 0 
+		for(var i in cart){
+			if(cart[i].itemId==id){
+				count =1 
+				cart[i].qty=cart[i].qty+1 
+			}
+		}
+		if(count==0){
+			cart.push({
+				"itemId": id ,
+				"qty" : 1,
+				"price":price
+			});	
+		}
+		this.setState({
+			cart:cart
+		})
+
+		this.props.getCart(cart)
+	}
 	render(){
+		var that = this ;
 		return (
 			  <Grid>
 			    <Row>
@@ -62,9 +93,9 @@ class Content extends React.Component{
 				    			<Col xs={6} md={3}>
 							      <Thumbnail src={item.food_item_pic} alt="242x200">
 							        <h3>{item.food_item_name}</h3>
-							        <p>Description</p>
+							        <p>${item.food_item_price}</p>
 							        <p>
-							          <Button bsStyle="default">ADD</Button>
+							          <Button key={item.food_item_id} bsStyle="default" onClick={() => that.addToCart(item.food_item_id)}>ADD</Button>
 							        </p>
 							      </Thumbnail>
 							    </Col>	

@@ -18,15 +18,18 @@ class Home extends React.Component {
    }
    currentGroupId(data){
       this.setState({
-         val :data
+         val :data 
       })
+   }
+   getCart(data){
+      
    }
    render(){
       return (
          <div>
             <Header/>
             <NavBar getData={this.state.val} currentGroupId={this.currentGroupId}/> 
-            <Content getData={this.state.val}/>
+            <Content getData={this.state.val} getCart={this.getCart}/>
          </div>
          )
    }
