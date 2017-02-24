@@ -56,9 +56,10 @@ class Content extends React.Component{
 		var items = this.state.items;
 		var cart = this.state.cart 
 		var price = 0
+		var obj = {}
 		for(var i in items){
 			if(items[i].food_item_id==id){
-				price = items[i].food_item_price
+				obj = items[i]
 			}
 		}
 		var count = 0 
@@ -72,13 +73,14 @@ class Content extends React.Component{
 			cart.push({
 				"itemId": id ,
 				"qty" : 1,
-				"price":price
+				"price":obj.food_item_price,
+				"img":obj.food_item_pic,
+				"name":obj.food_item_name
 			});	
 		}
 		this.setState({
 			cart:cart
 		})
-
 		this.props.getCart(cart)
 	}
 	render(){
