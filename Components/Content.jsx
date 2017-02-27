@@ -2,16 +2,26 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Grid,Row,Col} from 'react-bootstrap'
 import {Thumbnail,Button} from 'react-bootstrap'
+import cookie from 'react-cookie';
 
 class Content extends React.Component{
 	constructor(props) {
 		super(props);
-		this.state = {
-			items : [],
-			groups :[],
-			curItems : [],
-			cart : []
-		}
+		console.log("cart :",cookie.load('cart'))
+		if(cookie.load('cart')==undefined)
+			this.state = {
+				items : [],
+				groups :[],
+				curItems : [],
+				cart :[]
+			}
+		else 
+			this.state = {
+				items : [],
+				groups :[],
+				curItems : [],
+				cart :cookie.load('cart')
+			}
 		this.getContent = this.getContent.bind(this)
 		this.getContent()
 	}
@@ -81,6 +91,7 @@ class Content extends React.Component{
 		this.setState({
 			cart:cart
 		})
+		cookie.save('cart',cart,{path:'/'})
 		this.props.getCart(cart)
 	}
 	render(){
