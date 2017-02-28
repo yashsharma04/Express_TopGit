@@ -2,7 +2,7 @@
   "name": "reactjs-basics",
   "version": "1.0.0",
   "description": "Some basic ReactJS",
-  "main": "index.js",
+  "main": "index.jsx",
   "scripts": {
     "start": "npm run build",
     "build": "webpack -d && cp src/index.html dist/index.html && webpack-dev-server --content-base src/ --inline --hot --history-api-fallback",
@@ -15,7 +15,12 @@
   "license": "MIT",
   "dependencies": {
     "react": "^15.2.1",
-    "react-dom": "^15.2.1"
+    "react-dom": "^15.2.1",
+    "redux": "^3.6.0",
+    "redux-logger": "^2.8.1",
+    "webpack-preset": "^0.2.0",
+    "webpack-preset-babel": "^0.2.0",
+    "webpack-preset-babel-stage-2": "^0.2.0"
   },
   "devDependencies": {
     "babel-loader": "^6.2.4",
