@@ -2,10 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router, Route } from 'react-router'
 import {Nav,NavItem} from 'react-bootstrap'
-import Header from './Components/Header.jsx'
-import NavBar from './Components/NavBar.jsx'
-import Content from './Components/Content.jsx'
-import Cart from './Components/Cart.jsx'
+import Header from 'components/Header.jsx'
+import NavBar from 'components/NavBar.jsx'
+import Content from 'components/Content.jsx'
+import Cart from 'components/Cart.jsx'
 
 class Home extends React.Component {
    constructor(props){
