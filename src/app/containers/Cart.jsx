@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import {Modal,Button,Label} from 'react-bootstrap'
 import cookie from 'react-cookie'
 

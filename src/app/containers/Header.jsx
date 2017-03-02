@@ -11,14 +11,14 @@ class Header extends React.Component{
         this.state = {
           cart : [],
           lgShow:false
-        }
+       }
     else 
       this.state = {
         cart : cookie.load('cart'),
         lgShow:false
       }
-      
    }
+    // havent changed to redux
    componentWillReceiveProps(nextProps) {
      this.props = nextProps
      if(this.props.cart.length!=0){   

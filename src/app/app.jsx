@@ -1,12 +1,11 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { Router, Route } from 'react-router'
+import Header from 'containers/Header.jsx'
 import {Nav,NavItem} from 'react-bootstrap'
-import Header from 'components/Header.jsx'
-import NavBar from 'components/NavBar.jsx'
-import Content from 'components/Content.jsx'
-import Cart from 'components/Cart.jsx'
-
+/**import NavBar from 'containers/NavBar.jsx'
+import Content from 'containers/Content.jsx'
+import Cart from 'containers/Cart.jsx'
+**/
 class Home extends React.Component {
    constructor(props){
       super(props);
@@ -33,8 +32,8 @@ class Home extends React.Component {
       return (
          <div>
             <Header cart = {this.state.cart}/>
-            <NavBar getData={this.state.val} currentGroupId={this.currentGroupId}/> 
-            <Content getData={this.state.val} getCart={this.getCart}/>
+            /**<NavBar getData={this.state.val} currentGroupId={this.currentGroupId}/>**/
+            /**<Content getData={this.state.val} getCart={this.getCart}/>**/
          </div>
          )
    }
