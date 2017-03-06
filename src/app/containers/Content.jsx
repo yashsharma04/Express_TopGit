@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import {Grid,Row,Col} from 'react-bootstrap'
 import {Thumbnail,Button} from 'react-bootstrap'
 import cookie from 'react-cookie';
+import axios from 'axios'
 
 class Content extends React.Component{
 	constructor(props) {
@@ -37,22 +38,25 @@ class Content extends React.Component{
 		}
 		else{
 			console.log("inside else getContent")
-			$.getJSON('http://ec2-54-165-240-14.compute-1.amazonaws.com:3000/api/foodItem').then((data)=>{
-		      this.setState({
-		        items : data,
-		      });
-			  var curGroupId = this.props.cartReducer.val;
-		      var items = this.state.items ;
-		      var curItems= []; 
-		      for(var i in items){
-		      	if(items[i].food_group_id==curGroupId){
-		      		curItems.push(items[i]);
-		      	}
-		      }
-		      this.setState({
-		      	curItems : curItems
-		      })
-		    });			
+			axios.get('http://ec2-54-165-240-14.compute-1.amazonaws.com:3000/api/foodItem').then((data)=>{
+				this.setState({
+					items : data,
+				});
+				var curGroupId = this.props.cartReducer.val;
+				var items = this.state.items.data ;
+				var curItems= [];
+				for(var i in items){
+					if(items[i].food_group_id==curGroupId){
+						curItems.push(items[i]);
+					}
+				}
+				this.setState({
+					curItems : curItems
+				})
+				console.log("after setting state",this.state)
+			}).catch(function(err){
+				console.log(err)
+			})
 		}
 	}
 	addToCart(id){
