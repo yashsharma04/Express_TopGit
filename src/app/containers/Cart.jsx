@@ -1,4 +1,5 @@
 import React from 'react'
+import {render} from 'react-dom'
 import {Modal,Button,Label} from 'react-bootstrap'
 import cookie from 'react-cookie'
 
@@ -6,57 +7,49 @@ class Cart extends React.Component{
 	constructor(props) {
 		super(props)
 		console.log("Cart Constructor called")
-		if(cookie.load('cart')==undefined)
-			this.state = {
-				cart : []
-			}
-		else 
-			this.state = {
-				cart : cookie.load('cart')
-			}
-		this.props = props
 		this.addToCart = this.addToCart.bind(this);
 	}
+	componentWillMount(){
+		console.log("inside will mount ",this.props)
+	}
 	componentWillReceiveProps(nextProps){
-		console.log("Inside Receive props ")
+
 		this.props = nextProps
-		this.setState({
-			cart : this.props.getCart
-		})
+        console.log("Inside Receive props ",this.props)
 	}
 	deleteFromCart(id){
 		console.log("addtoCart",id)
-		var cart = this.state.cart 
+		var cart = this.props.cartReducer.cart
 		for(var i in cart){
 			if(cart[i].itemId==id){
 				if(cart[i].qty==1){
 					cart.splice(i,1);
 				}
 				else {
-					cart[i].qty= cart[i].qty- 1 
+					cart[i].qty= cart[i].qty- 1
 				}
 			}
 		}
-		this.setState({
-			cart:cart
-		})
+		this.props.setCart(cart);
+        cookie.save('cart',cart,{path:'/'})
 	}
 	addToCart(id){
-		console.log("deleteFromCart",id)
-		var cart = this.state.cart 
+		console.log("addToCart",id)
+        var cart = this.props.cartReducer.cart
 		for(var i in cart){
 			if(cart[i].itemId==id){
 				cart[i].qty= cart[i].qty + 1 
 			}
 		}
-		this.setState({
-			cart:cart
-		})
+		this.props.setCart(cart)
+        cookie.save('cart',cart,{path:'/'})
 
 	}
 	render(){
 		var that = this
-		var cost = 0 
+		var cost = 0
+		console.log("before rendering",that.props)
+        // console.log(that.props.initialise())
 		return (
 			<Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-sm">
 		        <Modal.Header closeButton>
@@ -64,7 +57,7 @@ class Cart extends React.Component{
 		        </Modal.Header>
 		        <Modal.Body>
 		        {
-		        	this.state.cart.map(function(item,i){
+		        	that.props.cartReducer.cart.map(function(item,i){
 		        		cost = cost + item.price*item.qty
 		        		return (
 		        				<div>

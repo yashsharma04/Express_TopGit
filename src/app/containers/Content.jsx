@@ -7,21 +7,12 @@ import cookie from 'react-cookie';
 class Content extends React.Component{
 	constructor(props) {
 		super(props);
-		console.log("cart :",cookie.load('cart'))
-		if(cookie.load('cart')==undefined)
-			this.state = {
-				items : [],
-				groups :[],
-				curItems : [],
-				cart :[]
-			}
-		else 
-			this.state = {
-				items : [],
-				groups :[],
-				curItems : [],
-				cart :cookie.load('cart')
-			}
+		console.log("inside content ",cookie.load('cart'))
+		this.state = {
+			items : [],
+			groups :[],
+			curItems : []
+		}
 		this.getContent = this.getContent.bind(this)
 		this.getContent()
 	}
@@ -30,8 +21,9 @@ class Content extends React.Component{
 		this.getContent()
 	}
 	getContent(){
+		console.log("inside getContent")
 		if(this.state.items.length!=0){
-			var curGroupId = this.props.getData;
+			var curGroupId = this.props.cartReducer.val;
 		    var items = this.state.items ;
 		    var curItems= []; 
 		    for(var i in items){
@@ -44,11 +36,12 @@ class Content extends React.Component{
 		    })	
 		}
 		else{
+			console.log("inside else getContent")
 			$.getJSON('http://ec2-54-165-240-14.compute-1.amazonaws.com:3000/api/foodItem').then((data)=>{
 		      this.setState({
 		        items : data,
 		      });
-		      var curGroupId = this.props.getData;
+			  var curGroupId = this.props.cartReducer.val;
 		      var items = this.state.items ;
 		      var curItems= []; 
 		      for(var i in items){
@@ -64,7 +57,7 @@ class Content extends React.Component{
 	}
 	addToCart(id){
 		var items = this.state.items;
-		var cart = this.state.cart 
+		var cart = this.props.cartReducer.cart
 		var price = 0
 		var obj = {}
 		for(var i in items){
@@ -88,14 +81,13 @@ class Content extends React.Component{
 				"name":obj.food_item_name
 			});	
 		}
-		this.setState({
-			cart:cart
-		})
+		this.props.setCart(cart)
 		cookie.save('cart',cart,{path:'/'})
-		this.props.getCart(cart)
 	}
 	render(){
 		var that = this ;
+		console.log("inside content render",this.state.curItems)
+
 		return (
 			  <Grid>
 			    <Row>

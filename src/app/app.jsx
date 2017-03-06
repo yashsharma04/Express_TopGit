@@ -1,41 +1,57 @@
 import React from 'react'
-import { Router, Route } from 'react-router'
-import Header from 'containers/Header.jsx'
-import {Nav,NavItem} from 'react-bootstrap'
-/**import NavBar from 'containers/NavBar.jsx'
-import Content from 'containers/Content.jsx'
-import Cart from 'containers/Cart.jsx'
-**/
+import Header from './containers/Header.jsx'
+import {connect} from 'react-redux'
+import {initialise,updateState,showModal,hideModal,setCart,curGroupId} from "./actions/cartAction.jsx"
+import NavBar from './containers/NavBar.jsx'
+import Content from './containers/Content.jsx'
+
+
 class Home extends React.Component {
    constructor(props){
       super(props);
-      this.props = props;
-      this.state = {
-         val:0,
-         cart:[]
-      }
-      this.currentGroupId= this.currentGroupId.bind(this)
-      this.getCart = this.getCart.bind(this)
+       console.log(props)
+      //this.props = props;
+      // this.props.initialise()
    }
-   currentGroupId(data){
-      this.setState({
-         val :data 
-      })
-   }
-   getCart(data){
-      console.log("App.jsx:  ",data)
-      this.setState({
-         cart:data
-      })
-   }
+    componentWillReceiveProps(props){
+        this.props = props
+    }
+
    render(){
       return (
          <div>
-            <Header cart = {this.state.cart}/>
-            /**<NavBar getData={this.state.val} currentGroupId={this.currentGroupId}/>**/
-            /**<Content getData={this.state.val} getCart={this.getCart}/>**/
+            <Header updateState={()=>this.props.updateState()}  showModal={()=>this.props.showModal()} initialise= {()=>this.props.initialise()} hideModal = {()=>this.props.hideModal()}  setCart = {(cart)=>this.props.setCart(cart)}  curGroupId = {()=>this.props.curGroupId()} cartReducer={this.props.cartReducer}/>
+             <NavBar updateState={()=>this.props.updateState()} showModal={()=>this.props.showModal()} initialise= {()=>this.props.initialise()} hideModal = {()=>this.props.hideModal()}  setCart = {(cart)=>this.props.setCart(cart)}  curGroupId = {(id)=>this.props.curGroupId(id)} cartReducer={this.props.cartReducer}/>
+             <Content updateState={()=>this.props.updateState()} showModal={()=>this.props.showModal()} initialise= {()=>this.props.initialise()} hideModal = {()=>this.props.hideModal()}  setCart = {(cart)=>this.props.setCart(cart)}  curGroupId = {(id)=>this.props.curGroupId(id)} cartReducer={this.props.cartReducer}/>
          </div>
          )
    }
 }
-export default Home
+const mapStateToProps = (state) => {
+    return {
+        cartReducer: state.cartReducer
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateState : () => {
+            dispatch(updateState())
+        },
+        showModal : ()=>{
+            dispatch(showModal())
+        },
+        initialise : ()=>{
+            dispatch(initialise())
+        },
+        hideModal : ()=>{
+            dispatch(hideModal())
+        },
+        setCart : (data)=>{
+            dispatch(setCart(data))
+        },
+        curGroupId : (data)=>{
+            dispatch(curGroupId(data))
+        }
+    };
+};
+export  default connect(mapStateToProps,mapDispatchToProps)(Home);
