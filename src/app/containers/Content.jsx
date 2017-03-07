@@ -40,10 +40,10 @@ class Content extends React.Component{
 			console.log("inside else getContent")
 			axios.get('http://ec2-54-165-240-14.compute-1.amazonaws.com:3000/api/foodItem').then((data)=>{
 				this.setState({
-					items : data,
+					items : data.data,
 				});
 				var curGroupId = this.props.cartReducer.val;
-				var items = this.state.items.data ;
+				var items = this.state.items ;
 				var curItems= [];
 				for(var i in items){
 					if(items[i].food_group_id==curGroupId){

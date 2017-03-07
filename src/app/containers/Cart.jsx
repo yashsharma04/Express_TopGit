@@ -2,6 +2,7 @@ import React from 'react'
 import {render} from 'react-dom'
 import {Modal,Button,Label} from 'react-bootstrap'
 import cookie from 'react-cookie'
+import {Link} from 'react-router'
 
 class Cart extends React.Component{
 	constructor(props) {
@@ -30,6 +31,7 @@ class Cart extends React.Component{
 				}
 			}
 		}
+
 		this.props.setCart(cart);
         cookie.save('cart',cart,{path:'/'})
 	}
@@ -43,7 +45,6 @@ class Cart extends React.Component{
 		}
 		this.props.setCart(cart)
         cookie.save('cart',cart,{path:'/'})
-
 	}
 	render(){
 		var that = this
@@ -62,9 +63,9 @@ class Cart extends React.Component{
 		        		return (
 		        				<div>
 		        					<img src={item.img} width="100" height = "100" alt='IMAGE' ></img>
-		        					<label> &nbsp;Item Name :{item.name}</label>
-		        					<label>  &nbsp;Item Price :{item.price}</label>
-		        					<label>  &nbsp;Item Qty :{item.qty}</label> &nbsp;
+		        					<label> &nbsp;Item Name :{item.name}</label>&nbsp;&nbsp;
+		        					<label>  &nbsp;Item Price :{item.price}</label>&nbsp;&nbsp;
+		        					<label>  &nbsp;Item Qty :{item.qty}</label> &nbsp;&nbsp;
 		        					<Button onClick={() => that.addToCart(item.itemId)}><i className="fa fa-plus right" aria-hidden="true"></i></Button>
 		        					<Button onClick={() => that.deleteFromCart(item.itemId)}><i className="fa fa-minus" aria-hidden="true"></i></Button>
 		        				</div>
@@ -76,6 +77,8 @@ class Cart extends React.Component{
 		        </Modal.Body>
 		        <Modal.Footer>
 		        <Button onClick={this.props.onHide}>Close</Button>
+                <Button >
+                    <Link to="/checkout">Checkout</Link></Button>
 		        </Modal.Footer>
 		      </Modal>
 			)

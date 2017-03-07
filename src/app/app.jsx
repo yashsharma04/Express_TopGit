@@ -4,14 +4,14 @@ import {connect} from 'react-redux'
 import {initialise,updateState,showModal,hideModal,setCart,curGroupId} from "./actions/cartAction.jsx"
 import NavBar from './containers/NavBar.jsx'
 import Content from './containers/Content.jsx'
-
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import store from './store.jsx'
+import { Router, Route, browserHistory } from 'react-router'
 
 class Home extends React.Component {
    constructor(props){
       super(props);
        console.log(props)
-      //this.props = props;
-      // this.props.initialise()
    }
     componentWillReceiveProps(props){
         this.props = props
@@ -27,6 +27,9 @@ class Home extends React.Component {
          )
    }
 }
+
+const history = syncHistoryWithStore(browserHistory, store)
+
 const mapStateToProps = (state) => {
     return {
         cartReducer: state.cartReducer
