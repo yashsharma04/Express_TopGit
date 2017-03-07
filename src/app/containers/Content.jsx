@@ -5,6 +5,7 @@ import {Thumbnail,Button} from 'react-bootstrap'
 import cookie from 'react-cookie';
 import axios from 'axios'
 
+
 class Content extends React.Component{
 	constructor(props) {
 		super(props);
@@ -60,7 +61,8 @@ class Content extends React.Component{
 		}
 	}
 	addToCart(id){
-		var items = this.state.items;
+        
+        var items = this.state.items;
 		var cart = this.props.cartReducer.cart
 		var price = 0
 		var obj = {}
@@ -93,6 +95,7 @@ class Content extends React.Component{
 		console.log("inside content render",this.state.curItems)
 
 		return (
+              <div>
 			  <Grid>
 			    <Row>
 			    {
@@ -114,6 +117,7 @@ class Content extends React.Component{
 			    }
 			    </Row>
 			  </Grid>
+                  </div>
 			)
 	}
 }

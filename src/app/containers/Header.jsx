@@ -4,6 +4,8 @@ import {Button} from 'react-bootstrap'
 import Cart from './Cart.jsx'
 import cookie from 'react-cookie'
 
+import {Link} from 'react-router'
+
 class Header extends React.Component{
    constructor(props) {
       super(props);
@@ -29,8 +31,9 @@ class Header extends React.Component{
               <div className='header'>
                 <i className="fa fa-align-justify left" aria-hidden="true"></i>
                 <label>Food Menu</label>
-                <Button className='right' onClick={()=>this.props.showModal()}><i className="fa fa-cart-plus right" aria-hidden="true"></i></Button>
-                <Cart show={this.props.cartReducer.lgShow} onHide={lgClose} updateState={this.props.updateState} updateCookie={this.props.updateCookie} showModal={this.props.showModal} initialise= {this.props.initialise} hideModal = {this.props.hideModal}  setCart = {this.props.setCart} getCart = {this.props.getCart} curGroupId = {this.props.curGroupId} cartReducer = {this.props.cartReducer}/>
+
+                <Button className='right'><Link to="/cart"><i className="fa fa-cart-plus right" aria-hidden="true"></i></Link></Button>
+                
               </div>
             </div>
          )
