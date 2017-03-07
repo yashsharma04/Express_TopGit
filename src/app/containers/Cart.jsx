@@ -9,7 +9,7 @@ import { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import store from '../store.jsx'
 import {Media} from 'react-bootstrap'
-var ReactNotify = require('react-notify');
+
 
 class Cart extends React.Component{
 	constructor(props) {
@@ -63,7 +63,6 @@ class Cart extends React.Component{
 		return (
 
                     <div className="body">
-                        <ReactNotify ref='notificator'/>
                         <div className="header">
                             <h1 className='center'>
                                 MyCart({cookie.load('cart').length})
