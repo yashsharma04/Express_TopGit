@@ -61,7 +61,7 @@ class Content extends React.Component{
 		}
 	}
 	addToCart(id){
-        
+
         var items = this.state.items;
 		var cart = this.props.cartReducer.cart
 		var price = 0
@@ -104,10 +104,10 @@ class Content extends React.Component{
 				    		<div>
 				    			<Col xs={6} md={3}>
 							      <Thumbnail src={item.food_item_pic} alt="242x200">
-							        <h3>{item.food_item_name}</h3>
+							        <label>{item.food_item_name}</label>
 							        <p>${item.food_item_price}</p>
 							        <p>
-							          <Button key={item.food_item_id} bsStyle="default" onClick={() => that.addToCart(item.food_item_id)}>ADD</Button>
+							          <Button className="btn1 font" key={item.food_item_id} bsStyle="default" onClick={() => that.addToCart(item.food_item_id)}>ADD</Button>
 							        </p>
 							      </Thumbnail>
 							    </Col>	

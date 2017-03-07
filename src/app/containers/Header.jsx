@@ -30,10 +30,10 @@ class Header extends React.Component{
             <div className='container '>
               <div className='header'>
                 <i className="fa fa-align-justify left" aria-hidden="true"></i>
-                <label>Food Menu</label>
+                <label className="font-header">Food Menu</label>
 
                 <Button className='right'><Link to="/cart"><i className="fa fa-cart-plus right" aria-hidden="true"></i></Link></Button>
-                
+
               </div>
             </div>
          )

@@ -17,7 +17,11 @@ class Cart extends React.Component{
 	}
 	componentWillMount(){
 		console.log("inside will mount ",this.props)
+
 	}
+    componentDidMount(){
+        this.props.setCart(cookie.load('cart'))
+    }
 	componentWillReceiveProps(nextProps){
 
 		this.props = nextProps
@@ -90,7 +94,7 @@ class Cart extends React.Component{
                                                 <div className="delivery">
                                                     <label>Free Delivery</label>
                                                 </div>
-                                                <br/><br/>
+                                                <br/>
                                             </Media.Body>
                                         </Media>
                                     </div>
@@ -103,10 +107,10 @@ class Cart extends React.Component{
 		        <label>Total Cost : Rs {cost}</label>
                         <br/><br/>
                 <Button className="btn1">
-                    <Link className="btn1"to="/">Continue Shopping</Link>
+                    <Link className="btn1 font-cart"to="/">Continue Shopping</Link>
                 </Button>
                 <Button className="btn1">
-                    <Link className="btn1"to="/checkout">Place Order</Link>
+                    <Link className="btn1 font-cart"to="/checkout">Place Order</Link>
 				</Button>
              </div>
 			)
