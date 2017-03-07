@@ -9,6 +9,8 @@ import { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import store from '../store.jsx'
 import {Media} from 'react-bootstrap'
+var ReactNotify = require('react-notify');
+
 class Cart extends React.Component{
 	constructor(props) {
 		super(props)
@@ -17,7 +19,6 @@ class Cart extends React.Component{
 	}
 	componentWillMount(){
 		console.log("inside will mount ",this.props)
-
 	}
     componentDidMount(){
         this.props.setCart(cookie.load('cart'))
@@ -62,6 +63,7 @@ class Cart extends React.Component{
 		return (
 
                     <div className="body">
+                        <ReactNotify ref='notificator'/>
                         <div className="header">
                             <h1 className='center'>
                                 MyCart({cookie.load('cart').length})
